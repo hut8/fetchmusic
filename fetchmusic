@@ -104,13 +104,10 @@ def query_and_download(search):
         '--output "{}"'.format(dest_path),
         'https://www.youtube.com' + video_link]
 
-    if is_quiet:
-        command_tokens.insert(1, '-q')
-
     command = ' '.join(command_tokens)
 
     # Youtube-dl is a proof that god exists.
-    if not is_quiet: print('Downloading')
+    print('Downloading')
     os.system(command)
 
 
@@ -185,11 +182,10 @@ def main():
                     song_list.extend(songs)
 
             prompt = True if results.has_prompt else False
-            quiet = True if results.is_quiet else False
 
             downloads = []
             for song in song_list:
-                downloads.append(query_and_download(song, prompt, quiet))
+                downloads.append(query_and_download(song, prompt))
 
             print('Downloaded: %s' % ', '.join(downloads))
 
